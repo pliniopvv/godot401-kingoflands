@@ -1,7 +1,7 @@
 @tool
 extends Node3D
 
-#@onready var chunk = preload("res://nodes/terrain/chunk.tscn")
+@onready var chunk = preload("res://nodes/terrain/chunk.tscn")
 @export_category("Configs")
 
 var map = {}
@@ -13,16 +13,16 @@ var map = {}
 var flip_flop = true
 
 @onready var surfacetool = SurfaceTool.new()
-@onready var qtd_chunks = 2
+@onready var qtd_chunks = 1
 func _ready():
 	surfacetool.begin(Mesh.PRIMITIVE_TRIANGLES)
-	generate_chunks(pos, qtd_chunks)
+	generate_chunks(qtd_chunks)
 	
-func generate_chunks(pos: Vector2, qtd_chunks: int):
+func generate_chunks(qtd_chunks: int):
 	for x in range(qtd_chunks):
 		for z in range(qtd_chunks):
-			var _x = pos.x + x - qtd_chunks/2
-			var _z = pos.y + z - qtd_chunks/2
+			var _x = x - qtd_chunks/2
+			var _z = z - qtd_chunks/2
 			if not map.has(Vector2(_x,_z)):
 				
 				if (flip_flop):
@@ -32,9 +32,8 @@ func generate_chunks(pos: Vector2, qtd_chunks: int):
 					set_mat(surfacetool,deserto)
 					flip_flop = true
 				
-#				var c = GenericChunk.new(surfacetool, _x, _z)
-				var c = GenericChunk.new()
-				c.generate_chunk(surfacetool, _x, _z)
+				var c = chunk.instantiate()
+				c.generate_terrain(surfacetool, Vector2(_x, _z))
 				map[Vector2(_x,_z)] = c
 				add_child(c)
 	

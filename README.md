@@ -4,4 +4,4 @@
 - [ ] Desenvolvimento de sistema para geração procedural de terreno baseado em biomas.
 
 ## bugfix
-- [ ] Geração de chunks bugada.
+- [X] Geração de chunks bugada.

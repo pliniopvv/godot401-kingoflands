@@ -11,7 +11,7 @@ material = SubResource("StandardMaterial3D_aqqac")
 [node name="main" type="Node3D"]
 
 [node name="luz" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 4.69231, 14.4536)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 4.69231, 14.4536)
 
 [node name="terrain" type="Node3D" parent="."]
 script = ExtResource("1_slsdw")
