@@ -1,30 +1,35 @@
 @tool
 extends Node3D
 
-@onready var chunk = preload("res://nodes/terrain/chunk.tscn")
-@export_category("Configs")
+@export_category("Configurações gerais")
+@export var qtd_chunks = 1
+@export_category("Cfg das chunks individuais")
+@export var size_chunks = Vector2(12,12)
+@export var altura_chunks = 5
 
 var map = {}
-@onready var pos = Vector2(0,0)
+@onready var chunk = preload("res://nodes/terrain/chunk.tscn")
 
 @onready var grama: Texture2D = preload("res://assets/texture/grass.jpg")
 @onready var deserto: Texture2D = preload("res://assets/texture/sand.jpg")
 
 var flip_flop = true
 
-@onready var surfacetool = SurfaceTool.new()
-@onready var qtd_chunks = 1
 func _ready():
+	var surfacetool = SurfaceTool.new()
 	surfacetool.begin(Mesh.PRIMITIVE_TRIANGLES)
-	generate_chunks(qtd_chunks)
+	generate_chunks(surfacetool)
+
+var noise: FastNoiseLite
+func generate_chunks(surfacetool: SurfaceTool):
+	var noise = FastNoiseLite.new()
+	noise.frequency = 0.007
+	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	
-func generate_chunks(qtd_chunks: int):
-	for x in range(qtd_chunks):
-		for z in range(qtd_chunks):
-			var _x = x - qtd_chunks/2
-			var _z = z - qtd_chunks/2
-			if not map.has(Vector2(_x,_z)):
-				
+	for x in range(qtd_chunks*2-1):
+		for z in range(qtd_chunks*2-1):
+			surfacetool.begin(Mesh.PRIMITIVE_TRIANGLES)
+			if not map.has(Vector2(x,z)):
 				if (flip_flop):
 					set_mat(surfacetool,grama)
 					flip_flop = false
@@ -33,10 +38,13 @@ func generate_chunks(qtd_chunks: int):
 					flip_flop = true
 				
 				var c = chunk.instantiate()
-				c.generate_terrain(surfacetool, Vector2(_x, _z))
-				map[Vector2(_x,_z)] = c
+				c.size = size_chunks
+				c.altura = altura_chunks
+				var posChunk = Vector2(x, z)
+				c.generate_terrain(noise, surfacetool, posChunk)
+				map[posChunk] = c
 				add_child(c)
-	
+
 func _process(delta):
 	pass
 

@@ -16,26 +16,22 @@ var uvz = 0
 var noise = FastNoiseLite.new()
 
 func _ready():
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	generate_terrain(st, Vector2(0,0))
 	pass
 
-func generate_terrain(st:SurfaceTool, pos:Vector2):
-	noise.frequency = 0.007
-	noise.noise_type = FastNoiseLite.TYPE_PERLIN
-
+func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, pos:Vector2):
 	for _z in range(lod+1):
 		if uvz == 0: uvz = 1
 		else: uvz = 0
 		for _x in range(lod+1):
-			var pontoNaMesh = Vector2(pos.x*size.x+(_x*(size.x/lod)-center_terrain.x), pos.y*size.y+(_z*(size.y/lod)-center_terrain.y))
+			var bLod = Vector2(size.x/lod, size.y/lod)
+			var bLodPos = Vector2(_x*bLod.x, _z*bLod.y)
+			var pontoNaMesh = Vector2(pos.x*size.x+(bLodPos.x-center_terrain.x), pos.y*size.y+(bLodPos.y-center_terrain.y))
 			var y = noise.get_noise_2d(pontoNaMesh.x, pontoNaMesh.y) * altura
 
-#			if uvx == 0: uvx = 1
-#			else: uvx = 0
-#			var uv = Vector2(uvx, uvz)
-#			st.set_uv(uv)
+			if uvx == 0: uvx = 1
+			else: uvx = 0
+			var uv = Vector2(uvx, uvz)
+			st.set_uv(uv)
 
 			var vertex = Vector3(pontoNaMesh.x, y, pontoNaMesh.y)
 			st.add_vertex(vertex)
@@ -54,9 +50,12 @@ func generate_terrain(st:SurfaceTool, pos:Vector2):
 
 	st.generate_normals()
 	mesh = st.commit()
+	st.clear()
 
-
+@export var update: bool = false
 func _process(delta):
+	if update:
+		update = false
 	pass
 
 func set_lod(_lod:int):
