@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxdh8lsqf0iil"]
+[gd_scene load_steps=6 format=3 uid="uid://cxdh8lsqf0iil"]
 
 [ext_resource type="Script" path="res://main/terrain.gd" id="1_slsdw"]
+[ext_resource type="Texture2D" uid="uid://7w08myerjfrf" path="res://assets/texture/grass.jpg" id="2_omrht"]
+[ext_resource type="Texture2D" uid="uid://dv01afi4q4dsc" path="res://assets/texture/sand.jpg" id="3_er2um"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqqac"]
 albedo_color = Color(1, 0.101961, 0, 1)
@@ -16,7 +18,8 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 [node name="terrain" type="Node3D" parent="."]
 script = ExtResource("1_slsdw")
 qtd_chunks = 2
-altura_chunks = 50
+grama = ExtResource("2_omrht")
+deserto = ExtResource("3_er2um")
 
 [node name="camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.98062, 0)
