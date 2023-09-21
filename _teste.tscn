@@ -1,4 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqu5ec53fe4bx"]
+[gd_scene load_steps=13 format=3 uid="uid://dqu5ec53fe4bx"]
+
+[ext_resource type="Script" path="res://_teste.gd" id="1_jfw4w"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kwkh3"]
 size = Vector2(10, 10)
@@ -51,6 +53,7 @@ noise = SubResource("FastNoiseLite_opomr")
 albedo_texture = SubResource("NoiseTexture2D_huy0p")
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_jfw4w")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 4, -5)

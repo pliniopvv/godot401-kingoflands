@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 
 @export_category("Configurações gerais")
