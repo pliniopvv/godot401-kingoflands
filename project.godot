@@ -12,12 +12,16 @@ config_version=5
 
 config/name="King Of Lands"
 run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.0", "GL Compatibility")
+config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 KHumidade="*res://autoloads/humidade.gd"
+
+[dotnet]
+
+project/assembly_name="King Of Lands"
 
 [rendering]
 

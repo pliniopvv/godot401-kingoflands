@@ -35,7 +35,7 @@ func generate_chunks(surfacetool: SurfaceTool):
 				c.altura = altura_chunks
 				c.lod = lod_chunks
 				var posChunk = Vector2(x, z)
-				c.generate_terrain(noise, surfacetool, posChunk)
+				c.GenerateTerrain(noise, surfacetool, posChunk)
 				map[posChunk] = c
 				add_child(c)
 

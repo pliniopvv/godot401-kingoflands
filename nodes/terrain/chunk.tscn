@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cagjrvm2a2615"]
 
-[ext_resource type="Script" path="res://nodes/terrain/chunk.gd" id="2_105c1"]
-[ext_resource type="Texture2D" uid="uid://7w08myerjfrf" path="res://assets/texture/grass.jpg" id="2_k5pjj"]
-[ext_resource type="Texture2D" uid="uid://dv01afi4q4dsc" path="res://assets/texture/sand.jpg" id="3_346g0"]
+[ext_resource type="Script" path="res://nodes/terrain/chunk.cs" id="1_igwg7"]
+[ext_resource type="Texture2D" uid="uid://7w08myerjfrf" path="res://assets/texture/grass.jpg" id="2_u46tr"]
+[ext_resource type="Texture2D" uid="uid://dv01afi4q4dsc" path="res://assets/texture/sand.jpg" id="3_my0ka"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_tx8v7"]
 _surfaces = [{
@@ -17,17 +17,14 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_4uxtb"]
-frequency = 0.001
-offset = Vector3(-12, 0, -12)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6mhpp"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g3v0i"]
-invert = true
-noise = SubResource("FastNoiseLite_4uxtb")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lrxew"]
+noise = SubResource("FastNoiseLite_6mhpp")
 
 [node name="chunk" type="MeshInstance3D"]
 mesh = SubResource("ArrayMesh_tx8v7")
-script = ExtResource("2_105c1")
-grama = ExtResource("2_k5pjj")
-deserto = ExtResource("3_346g0")
-humidade = SubResource("NoiseTexture2D_g3v0i")
+script = ExtResource("1_igwg7")
+grama = ExtResource("2_u46tr")
+deserto = ExtResource("3_my0ka")
+humidade = SubResource("NoiseTexture2D_lrxew")
