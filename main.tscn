@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxdh8lsqf0iil"]
+[gd_scene load_steps=7 format=3 uid="uid://cxdh8lsqf0iil"]
 
 [ext_resource type="Script" path="res://main/terrain.gd" id="1_slsdw"]
 [ext_resource type="Texture2D" uid="uid://7w08myerjfrf" path="res://assets/texture/grass.jpg" id="2_omrht"]
 [ext_resource type="Texture2D" uid="uid://dv01afi4q4dsc" path="res://assets/texture/sand.jpg" id="3_er2um"]
+[ext_resource type="PackedScene" uid="uid://dgumxtc2jpsh4" path="res://nodes/player/player.tscn" id="4_hqu8n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqqac"]
 albedo_color = Color(1, 0.101961, 0, 1)
@@ -17,12 +18,15 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 
 [node name="terrain" type="Node3D" parent="."]
 script = ExtResource("1_slsdw")
-qtd_chunks = 50
+chunks_fog = 1
 grama = ExtResource("2_omrht")
 deserto = ExtResource("3_er2um")
 
-[node name="camera" type="Camera3D" parent="."]
-transform = Transform3D(-0.707107, 0.183013, -0.683013, 0, 0.965926, 0.258819, 0.707107, 0.183013, -0.683013, -6, 16.4659, -6)
+[node name="player" parent="." instance=ExtResource("4_hqu8n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+
+[node name="camera" type="Camera3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 9)
 
 [node name="Node" type="Node" parent="."]
 

@@ -27,7 +27,6 @@ func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, pos:Vector2):
 			var bLod = Vector2(size.x/lod, size.y/lod)
 			var bLodPos = Vector2(_x*bLod.x, _z*bLod.y)
 			var pontoNaMesh = Vector2(pos.x*size.x+(bLodPos.x-center_terrain.x), pos.y*size.y+(bLodPos.y-center_terrain.y))
-#			var pontoNaMesh = Vector2(pos.x*size.x+(bLodPos.x), pos.y*size.y+(bLodPos.y))
 			var y = noise.get_noise_2d(pontoNaMesh.x, pontoNaMesh.y) * altura
 			
 			if uvx == 0: uvx = 1
@@ -54,12 +53,13 @@ func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, pos:Vector2):
 	
 	mesh = st.commit()
 	
+	create_trimesh_collision()
+	
 	var sm = ShaderMaterial.new()
 	sm.shader = preload("res://nodes/terrain/chunk.gdshader")
 #	sm.set_shader_parameter("teste", teste)
 	sm.set_shader_parameter("grama", grama)
 	sm.set_shader_parameter("deserto", deserto)
-	
 	
 	var fn = FastNoiseLite.new()
 	#fn.offset = Vector3(pos.x*size.x-center_terrain.x,pos.y*size.y-center_terrain.y,0.0)
