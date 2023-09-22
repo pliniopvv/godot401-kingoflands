@@ -88,7 +88,7 @@ public partial class chunk : MeshInstance3D
 		FastNoiseLite fn = new FastNoiseLite();
 		fn.Frequency = 0.01f;
 		fn.Offset = new Vector3(pos.X*12f-center_terrain.X,pos.Y*12f-center_terrain.Y, 0f);
-		GD.Print(fn.Offset);
+		// GD.Print(fn.Offset);
 		fn.NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth;
 
 		this.humidade = new NoiseTexture2D();

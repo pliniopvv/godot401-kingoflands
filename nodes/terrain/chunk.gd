@@ -58,7 +58,22 @@ func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, pos:Vector2):
 #	sm.set_shader_parameter("teste", teste)
 	sm.set_shader_parameter("grama", grama)
 	sm.set_shader_parameter("deserto", deserto)
+	
+	
+	var fn = FastNoiseLite.new()
+	fn.offset = Vector3(pos.x*size.x-center_terrain.x,pos.y*size.y-center_terrain.y,0.0)
+	fn.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH	
+	fn.frequency = 0.001
+	
+	humidade = NoiseTexture2D.new()
+	humidade.width = 12
+	humidade.height = 12
+	humidade.noise = fn
+	humidade.normalize = false
+
 	sm.set_shader_parameter("humidade", humidade)
+	sm.set_shader_parameter("pos", pos)
+	
 	st.set_material(sm)
 	mesh.surface_set_material(0, sm)
 	

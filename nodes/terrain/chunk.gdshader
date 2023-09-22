@@ -20,8 +20,6 @@ void vertex() {
 }
 
 void fragment() {
-//						12			12		/12	-	12,12/12,12=1 | 0,0
-//						13			12		/12	-	1,1 || 0.1,0.0
 	vec2 relPos = (vec2(vertex_x, vertex_z)/size - (pos/size));
 	
 	float hum = texture(humidade, relPos).r;

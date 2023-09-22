@@ -35,15 +35,15 @@ func generate_chunks(surfacetool: SurfaceTool):
 				c.altura = altura_chunks
 				c.lod = lod_chunks
 				
-				if (flip_flop):
-					flip_flop = !flip_flop
-					c.teste = 1.0
-				else:
-					flip_flop = !flip_flop
-					c.teste = 0.0
+				#if (flip_flop):
+					#flip_flop = !flip_flop
+					#c.teste = 1.0
+				#else:
+					#flip_flop = !flip_flop
+					#c.teste = 0.0
 				
 				var posChunk = Vector2(x, z)
-				var s = c.GenerateTerrain(noise, surfacetool, posChunk)
+				c.generate_terrain(noise, surfacetool, posChunk)
 				map[posChunk] = c
 				add_child(c)
 
