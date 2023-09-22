@@ -18,6 +18,8 @@ public partial class chunk : MeshInstance3D
 	private float altura = 5.0f;
 	[Export]
 	private int lod = 5;
+	[Export]
+	private bool flat = false;
 
 	private Vector2 center_terrain;
 
@@ -49,7 +51,10 @@ public partial class chunk : MeshInstance3D
 				Vector2 bLod = new Vector2(this.size.X / lod, this.size.Y / lod);
 				Vector2 bLodPos = new Vector2(x * bLod.X, z * bLod.Y);
 				Vector2 pontoNaMesh = new Vector2(pos.X * size.X + (bLodPos.X - center_terrain.X), pos.Y * size.Y + (bLodPos.Y - center_terrain.Y));
-				float y = noise.GetNoise2D(pontoNaMesh.X, pontoNaMesh.Y) * altura;
+				float y = 0f;
+				if (this.flat) {
+					y = noise.GetNoise2D(pontoNaMesh.X, pontoNaMesh.Y) * altura;
+				}
 
 				Vector2 uv = new Vector2(uvx, uvy);
 				st.SetUV(uv);

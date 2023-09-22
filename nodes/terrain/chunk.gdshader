@@ -27,13 +27,13 @@ void fragment() {
 	vec3 corDeserto = texture(deserto, UV).rgb;
 	
 	vec3 cor = texture(grama, UV).rgb;
-	if (hum < 0.45) {
+	if (hum < 0.5) {
 		cor = corDeserto;
 	//} else if ((0.45 <= hum) && (hum <= 0.55)) {
 		////cor = mix(corDeserto, corGrama, smoothstep(0.45,0.55,hum));
 		//cor = vec3(1.0,0.0,0.0);
 	//} else if (hum > 0.55) {
-	} else if (hum >= 0.45) {
+	} else if (hum >= 0.50) {
 		cor = corGrama;
 	}
 
