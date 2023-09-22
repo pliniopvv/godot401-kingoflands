@@ -10,6 +10,7 @@ class_name GenericChunk
 @export var altura = 5.0
 
 var center_terrain = size/2
+var noise_detail = 12.0
 
 var uvx = 0
 var uvz = 0
@@ -61,18 +62,21 @@ func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, pos:Vector2):
 	
 	
 	var fn = FastNoiseLite.new()
-	fn.offset = Vector3(pos.x*size.x-center_terrain.x,pos.y*size.y-center_terrain.y,0.0)
+	#fn.offset = Vector3(pos.x*size.x-center_terrain.x,pos.y*size.y-center_terrain.y,0.0)
+	fn.offset = Vector3(pos.x*size.x,pos.y*size.y,0.0)
 	fn.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH	
 	fn.frequency = 0.001
 	
 	humidade = NoiseTexture2D.new()
-	humidade.width = 12
-	humidade.height = 12
+	humidade.width = noise_detail
+	humidade.height = noise_detail
 	humidade.noise = fn
 	humidade.normalize = false
 
 	sm.set_shader_parameter("humidade", humidade)
 	sm.set_shader_parameter("pos", pos)
+	
+	sm.set_shader_parameter("size", Vector2(noise_detail,noise_detail))
 	
 	st.set_material(sm)
 	mesh.surface_set_material(0, sm)

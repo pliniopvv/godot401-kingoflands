@@ -21,7 +21,6 @@ void vertex() {
 
 void fragment() {
 	vec2 relPos = (vec2(vertex_x, vertex_z)/size - (pos/size));
-	
 	float hum = texture(humidade, relPos).r;
 	
 	//float hum = texture(humidade, vec2(vertex_x, vertex_z)/size).r;
