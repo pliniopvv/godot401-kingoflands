@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King Of Lands", "King Of Lands.csproj", "{DAF1AF53-AEC1-4AB6-AB30-12E62D27C11F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King Of Lands", "King Of Lands.csproj", "{6F0AD76B-F475-45C9-98F9-A36D95C48D30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DAF1AF53-AEC1-4AB6-AB30-12E62D27C11F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAF1AF53-AEC1-4AB6-AB30-12E62D27C11F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAF1AF53-AEC1-4AB6-AB30-12E62D27C11F}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{DAF1AF53-AEC1-4AB6-AB30-12E62D27C11F}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{DAF1AF53-AEC1-4AB6-AB30-12E62D27C11F}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{DAF1AF53-AEC1-4AB6-AB30-12E62D27C11F}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{6F0AD76B-F475-45C9-98F9-A36D95C48D30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F0AD76B-F475-45C9-98F9-A36D95C48D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F0AD76B-F475-45C9-98F9-A36D95C48D30}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{6F0AD76B-F475-45C9-98F9-A36D95C48D30}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{6F0AD76B-F475-45C9-98F9-A36D95C48D30}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{6F0AD76B-F475-45C9-98F9-A36D95C48D30}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal

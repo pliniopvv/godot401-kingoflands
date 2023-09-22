@@ -1,6 +1,7 @@
 shader_type spatial;
 
-uniform vec2 size = vec2(512);
+uniform vec2 size = vec2(12);
+uniform vec2 pos = vec2(0);
 uniform float teste;
 
 uniform sampler2D grama;
@@ -19,7 +20,14 @@ void vertex() {
 }
 
 void fragment() {
-	float hum = texture(humidade, vec2(vertex_x, vertex_z)/size).r;
+//						12			12		/12	-	12,12/12,12=1 | 0,0
+//						13			12		/12	-	1,1 || 0.1,0.0
+	vec2 relPos = (vec2(vertex_x, vertex_z)/size - (pos/size));
+	
+	float hum = texture(humidade, relPos).r;
+	
+	//float hum = texture(humidade, vec2(vertex_x, vertex_z)/size).r;
+	//float hum = texture(humidade, (pos-floor(pos))/size).r;
 	
 //	float select_texture = step(0.5, hum);
 	vec3 corGrama = texture(grama, UV).rgb;
@@ -35,7 +43,8 @@ void fragment() {
 		cor = corGrama;
 	}
 
-//	cor = texture(humidade, vec2(vertex_x, vertex_z)/size).rgb;
+	//cor = texture(humidade, vec2(vertex_x, vertex_z)/size).rgb;
 	ALBEDO = cor;
-//	ALBEDO = vec3(teste,teste,teste);
+	//ALBEDO = vec3(hum,hum,hum);
+	//ALBEDO = vec3(teste,teste,teste);
 }
