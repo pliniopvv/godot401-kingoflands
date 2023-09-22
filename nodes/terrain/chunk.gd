@@ -8,13 +8,12 @@ class_name GenericChunk
 @export var size = Vector2(12,12)
 @export var lod = 5
 @export var altura = 5.0
+@export var flat = false
 
 var center_terrain = size/2
-var noise_detail = 12.0
 
 var uvx = 0
 var uvz = 0
-
 
 func _ready():
 	pass
@@ -27,7 +26,10 @@ func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, pos:Vector2):
 			var bLod = Vector2(size.x/lod, size.y/lod)
 			var bLodPos = Vector2(_x*bLod.x, _z*bLod.y)
 			var pontoNaMesh = Vector2(pos.x*size.x+(bLodPos.x-center_terrain.x), pos.y*size.y+(bLodPos.y-center_terrain.y))
-			var y = noise.get_noise_2d(pontoNaMesh.x, pontoNaMesh.y) * altura
+			
+			var y = 0
+			if not flat:
+				y = noise.get_noise_2d(pontoNaMesh.x, pontoNaMesh.y) * altura
 			
 			if uvx == 0: uvx = 1
 			else: uvx = 0
@@ -68,15 +70,15 @@ func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, pos:Vector2):
 	fn.frequency = 0.001
 	
 	humidade = NoiseTexture2D.new()
-	humidade.width = noise_detail
-	humidade.height = noise_detail
+	humidade.width = size.x
+	humidade.height = size.y
 	humidade.noise = fn
 	humidade.normalize = false
 
 	sm.set_shader_parameter("humidade", humidade)
 	sm.set_shader_parameter("pos", pos)
 	
-	sm.set_shader_parameter("size", Vector2(noise_detail,noise_detail))
+	sm.set_shader_parameter("size", size)
 	
 	st.set_material(sm)
 	mesh.surface_set_material(0, sm)

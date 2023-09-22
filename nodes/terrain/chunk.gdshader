@@ -23,20 +23,17 @@ void fragment() {
 	vec2 relPos = (vec2(vertex_x, vertex_z)/size - (pos/size));
 	float hum = texture(humidade, relPos).r;
 	
-	//float hum = texture(humidade, vec2(vertex_x, vertex_z)/size).r;
-	//float hum = texture(humidade, (pos-floor(pos))/size).r;
-	
-//	float select_texture = step(0.5, hum);
 	vec3 corGrama = texture(grama, UV).rgb;
 	vec3 corDeserto = texture(deserto, UV).rgb;
-	
 	
 	vec3 cor = texture(grama, UV).rgb;
 	if (hum < 0.45) {
 		cor = corDeserto;
-	} else if ((0.45 <= hum) && (hum <= 0.55)) {
-		cor = mix(corDeserto, corGrama, smoothstep(0.45,0.55,hum));
-	} else if (hum > 0.55) {
+	//} else if ((0.45 <= hum) && (hum <= 0.55)) {
+		////cor = mix(corDeserto, corGrama, smoothstep(0.45,0.55,hum));
+		//cor = vec3(1.0,0.0,0.0);
+	//} else if (hum > 0.55) {
+	} else if (hum >= 0.45) {
 		cor = corGrama;
 	}
 
