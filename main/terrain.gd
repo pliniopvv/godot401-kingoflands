@@ -29,8 +29,8 @@ func _ready():
 		generate_chunks(pos)
 
 func generate_chunks(pos: Vector2):
-	for x in range(load_distance*2-1):
-		for z in range(load_distance*2-1):
+	for x in range(load_distance*2+1):
+		for z in range(load_distance*2+1):
 			var fx = floor(pos.x+x-load_distance)
 			var fz = floor(pos.y+z-load_distance)
 			surfacetool.begin(Mesh.PRIMITIVE_TRIANGLES)

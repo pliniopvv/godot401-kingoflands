@@ -24,12 +24,13 @@ void fragment() {
 	vec2 uvmask = position/size - pos_origin;
 	//vec2 uvmask = position/size;
 	float hum = texture(humidade, uvmask).r;
+	float temp = texture(temperatura, uvmask).r;
 	
 	vec3 corGrama = texture(grama, UV).rgb;
 	vec3 corDeserto = texture(deserto, UV).rgb;
 	
 	vec3 cor = corGrama;
-	if (hum < 0.5) {
+	if ((hum < 0.35) && (temp > 0.45)) {
 		cor = corDeserto;
 	//} else if ((0.45 <= hum) && (hum <= 0.55)) {
 		////cor = mix(corDeserto, corGrama, smoothstep(0.45,0.55,hum));

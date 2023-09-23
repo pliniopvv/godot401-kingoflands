@@ -11,9 +11,11 @@ public partial class chunk : MeshInstance3D
 	private Texture2D deserto;
 	[Export]
 	private NoiseTexture2D humidade;
+	[Export]
+	private NoiseTexture2D temperatura;
 	[ExportGroup("Valores")]
 	[Export]
-	private Vector2 size = new Vector2(12, 12);
+	private Vector2 size = new Vector2(12f, 12f);
 	[Export]
 	private float altura = 5.0f;
 	[Export]
@@ -56,7 +58,8 @@ public partial class chunk : MeshInstance3D
 					y = noise.GetNoise2D(pontoNaMesh.X, pontoNaMesh.Y) * altura;
 				}
 
-				Vector2 uv = new Vector2(uvx, uvy);
+				// Vector2 uv = new Vector2(uvx, uvy);
+				Vector2 uv = sUnid;
 				st.SetUV(uv);
 
 				Vector3 vertex = new Vector3(pontoNaMesh.X, y, pontoNaMesh.Y);
@@ -89,23 +92,50 @@ public partial class chunk : MeshInstance3D
 		sm.Shader = (Shader)GD.Load("res://nodes/terrain/chunk.gdshader");
 		sm.SetShaderParameter("grama", this.grama);
 		sm.SetShaderParameter("deserto", this.deserto);
-		
+
+		//
+		//					HUMIDADE
+		//
+
 		FastNoiseLite fn = new FastNoiseLite();
-		fn.Frequency = 0.01f;
-		fn.Offset = new Vector3(pos.X*12f-center_terrain.X,pos.Y*12f-center_terrain.Y, 0f);
+		fn.Frequency = 0.001f;
+		fn.Offset = new Vector3(	pos.X*12f-center_terrain.X //* 512f
+									,pos.Y*12f-center_terrain.Y //* 512f
+									,0f
+		);
 		// GD.Print(fn.Offset);
 		fn.NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth;
 
 		this.humidade = new NoiseTexture2D();
-		this.humidade.Width = 12;
-		this.humidade.Height = 12;
+		this.humidade.Width = (int) this.size.X;
+		this.humidade.Height = (int) this.size.Y;
 		this.humidade.Noise = fn;
 		this.humidade.Normalize = false;
+
+		//
+		//					TEMPERATURA
+		//
+
+
+		FastNoiseLite fnt = new FastNoiseLite();
+		fnt.Frequency = 0.001f;
+		fnt.Seed = fn.Seed + 1;
+		fnt.Offset = new Vector3(	pos.X*12f-center_terrain.X //* 512f
+									,pos.Y*12f-center_terrain.Y //* 512f
+									,0f
+		);
+
+		this.temperatura = new NoiseTexture2D();
+		this.temperatura.Width = (int) this.size.X;
+		this.temperatura.Height = (int) this.size.Y;
+		this.temperatura.Noise = fnt;
+		this.temperatura.Normalize = false;
 		// GD.Print("xoff: ", pos.X*size.X , " yoff: ", pos.Y*size.Y , " ref: ", fn);
 
 		sm.SetShaderParameter("pos", pos*12f);
 
 		sm.SetShaderParameter("humidade", this.humidade);
+		sm.SetShaderParameter("temperatura", this.temperatura);
 		st.SetMaterial(sm);
 		this.Mesh.SurfaceSetMaterial(0, sm);
 	}

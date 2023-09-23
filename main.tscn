@@ -22,7 +22,6 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 
 [node name="terrain" type="Node3D" parent="."]
 script = ExtResource("1_slsdw")
-load_distance = 10
 grama = ExtResource("2_omrht")
 deserto = ExtResource("3_er2um")
 flat = true
