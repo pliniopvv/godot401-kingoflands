@@ -48,9 +48,9 @@ public partial class chunk : MeshInstance3D
 			{
 				uvx = uvx == 0 ? 1 : 0;
 
-				Vector2 bLod = new Vector2(this.size.X / lod, this.size.Y / lod);
-				Vector2 bLodPos = new Vector2(x * bLod.X, z * bLod.Y);
-				Vector2 pontoNaMesh = new Vector2(pos.X * size.X + (bLodPos.X - center_terrain.X), pos.Y * size.Y + (bLodPos.Y - center_terrain.Y));
+				Vector2 unid = this.size/this.lod;
+				Vector2 sUnid = new Vector2(x, z) * unid;
+				Vector2 pontoNaMesh = pos * this.size + sUnid - center_terrain ;
 				float y = 0f;
 				if (!this.flat) {
 					y = noise.GetNoise2D(pontoNaMesh.X, pontoNaMesh.Y) * altura;
