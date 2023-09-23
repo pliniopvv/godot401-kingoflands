@@ -19,7 +19,7 @@ public partial class chunk : MeshInstance3D
 	[Export]
 	private int lod = 5;
 	[Export]
-	private bool flat = false;
+	public bool flat = false;
 
 	private Vector2 center_terrain;
 
@@ -52,7 +52,7 @@ public partial class chunk : MeshInstance3D
 				Vector2 bLodPos = new Vector2(x * bLod.X, z * bLod.Y);
 				Vector2 pontoNaMesh = new Vector2(pos.X * size.X + (bLodPos.X - center_terrain.X), pos.Y * size.Y + (bLodPos.Y - center_terrain.Y));
 				float y = 0f;
-				if (this.flat) {
+				if (!this.flat) {
 					y = noise.GetNoise2D(pontoNaMesh.X, pontoNaMesh.Y) * altura;
 				}
 

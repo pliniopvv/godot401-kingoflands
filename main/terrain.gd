@@ -15,22 +15,22 @@ extends Node3D
 var map = {}
 var pos = Vector2(0,0)
 var player: CharacterBody3D
+var surfacetool: SurfaceTool
+var noise: FastNoiseLite
 
 func set_player(p: CharacterBody3D):
 	player = p
 
 func _ready():
+		surfacetool = SurfaceTool.new()
+		noise = FastNoiseLite.new()
+		noise.frequency = 0.07
+		noise.noise_type = FastNoiseLite.TYPE_PERLIN
 		generate_chunks(pos)
 
 func generate_chunks(pos: Vector2):
-	var surfacetool = SurfaceTool.new()
-	surfacetool.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var noise = FastNoiseLite.new()
-	noise.frequency = 0.07
-	noise.noise_type = FastNoiseLite.TYPE_PERLIN
-	
-	for x in range(load_distance*2+1):
-		for z in range(load_distance*2+1):
+	for x in range(load_distance*2-1):
+		for z in range(load_distance*2-1):
 			var fx = floor(pos.x+x-load_distance)
 			var fz = floor(pos.y+z-load_distance)
 			surfacetool.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -53,5 +53,5 @@ func generate_chunk(noise:FastNoiseLite, surfacetool: SurfaceTool, posChunk: Vec
 	c.altura = altura_chunks
 	c.lod = lod
 	c.flat = flat
-	c.generate_terrain(noise, surfacetool, posChunk)
+	c.GenerateTerrain(noise, surfacetool, posChunk)
 	return c

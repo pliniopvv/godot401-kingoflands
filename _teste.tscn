@@ -8,7 +8,6 @@ subdivide_width = 5
 subdivide_depth = 5
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7aa44"]
-frequency = 0.001
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r73fh"]
 width = 100
@@ -20,7 +19,6 @@ noise = SubResource("FastNoiseLite_7aa44")
 albedo_texture = SubResource("NoiseTexture2D_r73fh")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bykjj"]
-frequency = 0.001
 offset = Vector3(0, 100, 0)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ltkba"]
@@ -40,7 +38,6 @@ subdivide_width = 5
 subdivide_depth = 5
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_opomr"]
-frequency = 0.001
 offset = Vector3(0, 200, 0)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_huy0p"]
@@ -62,21 +59,6 @@ shadow_enabled = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_kwkh3")
 surface_material_override/0 = SubResource("StandardMaterial3D_og472")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
-mesh = SubResource("PlaneMesh_kwkh3")
-surface_material_override/0 = SubResource("StandardMaterial3D_og472")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
-mesh = SubResource("PlaneMesh_kwkh3")
-surface_material_override/0 = SubResource("StandardMaterial3D_usmo8")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
-mesh = SubResource("PlaneMesh_p81jn")
-surface_material_override/0 = SubResource("StandardMaterial3D_cqej4")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
