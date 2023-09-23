@@ -86,6 +86,8 @@ public partial class chunk : MeshInstance3D
 		st.GenerateNormals();
 		this.Mesh = st.Commit();
 
+		CreateTrimeshCollision();
+
 		ShaderMaterial sm = new ShaderMaterial();
 		// var script = ((Shader)GD.Load("res://nodes/terrain/chunk.gdshader")).GetScript();
 		// sm.SetScript(script);
