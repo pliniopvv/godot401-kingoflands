@@ -27,23 +27,27 @@ void fragment() {
 	uvposition = uvposition - center;
 	vec3 cor = texture(biome, uvposition).rgb;
 
-	if (uvposition.x < 0.2) {
-		vec3 cOeste = texture(oeste, uvposition).rgb;
-		cor = mix(cor, cOeste, smoothstep(0.0,0.2, uvposition.x));
-	} else if (uvposition.y > 0.8) {
-		vec3 cLeste = texture(leste, uvposition).rgb;
-		//cor = mix(cor, cLeste, smoothstep(0.8, 1.0, uvposition.x));
+	if (UV.x < 0.1) {
+		vec3 cOeste = texture(oeste, UV).rgb;
+		cor = mix(cOeste, cor, smoothstep(0.0,0.2, UV.x)+0.5);
 	}
 	
-	if (uvposition.y < 0.2) {
-		vec3 cNorte = texture(norte, uvposition).rgb;
-		//cor = mix(cor, cNorte, smoothstep(0.0,0.2, uvposition.y));
-	} else if(uvposition.y > 0.8) {
-		vec3 cSul = texture(sul, uvposition).rgb;
-		//cor = mix(cor, cSul, smoothstep(0.8,1.0, uvposition.y));
+	if (UV.x > 0.9) {
+		vec3 cLeste = texture(leste, UV).rgb;
+		cor = mix(cor, cLeste, smoothstep(0.8, 1.0, UV.x)-0.5);
+	}
+	
+	if (UV.y > 0.9) {
+		vec3 cNorte = texture(norte, UV).rgb;
+		cor = mix(cor, cNorte, smoothstep(0.8,1.0, UV.y)-0.5);
+	}
+	
+	if(UV.y < 0.1) {
+		vec3 cSul = texture(sul, UV).rgb;
+		cor = mix(cSul, cor, smoothstep(0.0,0.2, UV.y)+0.5);
 	}
 
-	//ALBEDO = cor;
+	ALBEDO = cor;
 	//ALBEDO = vec3(vertex_x,vertex_z, 0.0);
-	ALBEDO = vec3(UV, 0.0);
+	//ALBEDO = vec3(UV, 0.0);
 }
