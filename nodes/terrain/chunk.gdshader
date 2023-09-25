@@ -4,13 +4,12 @@ uniform vec2 size = vec2(12.0);
 uniform vec2 origin = vec2(0.0);
 uniform float teste;
 
-uniform sampler2D grama;
-uniform sampler2D deserto;
-uniform sampler2D rocha;
+uniform sampler2D oeste;
+uniform sampler2D leste;
+uniform sampler2D norte;
+uniform sampler2D sul;
 
-uniform sampler2D humidade;
-uniform float lim_hum = 0.5;
-uniform sampler2D temperatura;
+uniform sampler2D biome;
 
 varying float vertex_x;
 varying float vertex_z;
@@ -18,49 +17,33 @@ varying vec2 position;
 
 void vertex() {
 	position = vec2(VERTEX.x, VERTEX.z);
+	vertex_x = VERTEX.x;
+	vertex_z = VERTEX.z;
 }
 
 void fragment() {
-	vec2 pos_origin = origin/size;
-	vec2 uvmask = position/size - pos_origin;
-	//vec2 uvmask = position/size;
-	float hum = texture(humidade, uvmask).r;
-	float temp = texture(temperatura, uvmask).r;
-	
-	vec3 corGrama = texture(grama, UV).rgb;
-	vec3 corDeserto = texture(deserto, UV).rgb;
+	vec2 center = size/2.0;
+	vec2 uvposition = position/size - (origin-center)*size;
+	uvposition = uvposition - center;
+	vec3 cor = texture(biome, uvposition).rgb;
 
-
-	vec3 cor = corGrama;
-	if (hum < lim_hum) {
-		//cor = mix(cor, corDeserto, smoothstep(lim_hum, lim_hum, hum));
-		cor = corDeserto;
+	if (uvposition.x < 0.2) {
+		vec3 cOeste = texture(oeste, uvposition).rgb;
+		cor = mix(cor, cOeste, smoothstep(0.0,0.2, uvposition.x));
+	} else if (uvposition.y > 0.8) {
+		vec3 cLeste = texture(leste, uvposition).rgb;
+		//cor = mix(cor, cLeste, smoothstep(0.8, 1.0, uvposition.x));
 	}
 	
-	//vec3 cor = corGrama;
-	//if ((hum < 0.35) && (temp > 0.45)) {
-		////cor = corDeserto;
-		//float ihum = 1.0 - hum; // 0.65
-		//float tt = ihum + temp; // 1.10
-		//cor = mix(cor, corDeserto, smoothstep(1.10,1.11, tt));
-	//}
-	ALBEDO = cor;
-	
-	
-	
-	//
-	//
-	//		TESTAGEM DA HUMIDADE
-	//
-	//
-	//
+	if (uvposition.y < 0.2) {
+		vec3 cNorte = texture(norte, uvposition).rgb;
+		//cor = mix(cor, cNorte, smoothstep(0.0,0.2, uvposition.y));
+	} else if(uvposition.y > 0.8) {
+		vec3 cSul = texture(sul, uvposition).rgb;
+		//cor = mix(cor, cSul, smoothstep(0.8,1.0, uvposition.y));
+	}
 
-	//ALBEDO = vec3(hum,1.0-hum,0.0);
-	//if (step(0.5,hum) == 0.0) {
-		//ALBEDO = vec3(1.0,0.0,0.0);
-	//} else {
-		//ALBEDO = vec3(0.0,1.0,0.0);
-	//}
-	
-	//ALBEDO = vec3(teste,teste,teste);
+	//ALBEDO = cor;
+	//ALBEDO = vec3(vertex_x,vertex_z, 0.0);
+	ALBEDO = vec3(UV, 0.0);
 }
