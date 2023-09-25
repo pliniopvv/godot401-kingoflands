@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxdh8lsqf0iil"]
+[gd_scene load_steps=8 format=3 uid="uid://cxdh8lsqf0iil"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_qd6ei"]
 [ext_resource type="Script" path="res://main/terrain.gd" id="1_slsdw"]
@@ -12,21 +12,6 @@ albedo_color = Color(1, 0.101961, 0, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kydvw"]
 material = SubResource("StandardMaterial3D_aqqac")
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nj1eq"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_cr0ru"]
-sky_material = SubResource("ProceduralSkyMaterial_nj1eq")
-
-[sub_resource type="Environment" id="Environment_506fa"]
-background_mode = 2
-sky = SubResource("Sky_cr0ru")
-tonemap_mode = 2
-fog_enabled = true
-fog_light_color = Color(0, 0, 0, 1)
-fog_sun_scatter = 0.1
-
 [node name="main" type="Node3D" node_paths=PackedStringArray("terrain", "player")]
 script = ExtResource("1_qd6ei")
 terrain = NodePath("terrain")
@@ -37,11 +22,11 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 
 [node name="terrain" type="Node3D" parent="."]
 script = ExtResource("1_slsdw")
-load_distance = 5
 grama = ExtResource("2_omrht")
 deserto = ExtResource("3_er2um")
 altura_chunks = 1
 lod = 25
+flat = true
 
 [node name="player" parent="." instance=ExtResource("4_hqu8n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -74,6 +59,3 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
 mesh = SubResource("CapsuleMesh_kydvw")
 skeleton = NodePath("../..")
-
-[node name="ambiente" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_506fa")

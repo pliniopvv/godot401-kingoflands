@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cagjrvm2a2615"]
+[gd_scene load_steps=3 format=3 uid="uid://cagjrvm2a2615"]
 
-[ext_resource type="Script" path="res://nodes/terrain/chunk.cs" id="1_qu88c"]
-[ext_resource type="Texture2D" uid="uid://c17hrwhou6ui5" path="res://assets/texture/grass2.jpg" id="2_l1v8e"]
-[ext_resource type="Texture2D" uid="uid://dv01afi4q4dsc" path="res://assets/texture/sand.jpg" id="3_7f2qt"]
+[ext_resource type="Script" path="res://nodes/terrain/chunk.gd" id="1_63v81"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_tx8v7"]
 _surfaces = [{
@@ -19,6 +17,4 @@ blend_shape_mode = 0
 
 [node name="chunk" type="MeshInstance3D"]
 mesh = SubResource("ArrayMesh_tx8v7")
-script = ExtResource("1_qu88c")
-grama = ExtResource("2_l1v8e")
-deserto = ExtResource("3_7f2qt")
+script = ExtResource("1_63v81")

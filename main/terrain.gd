@@ -34,9 +34,9 @@ func generate_chunks(pos: Vector2):
 			var fx = floor(pos.x+x-load_distance)
 			var fz = floor(pos.y+z-load_distance)
 			surfacetool.begin(Mesh.PRIMITIVE_TRIANGLES)
-			if not map.has(Vector2(fx,fz)):
+			var pC = Vector2(fx,fz)
+			if not map.has(pC):
 				#criação das chunks
-				var pC = Vector2(fx,fz)
 				var chunk = generate_chunk(noise, surfacetool, pC)
 				map[pC] = chunk
 				add_child(chunk)

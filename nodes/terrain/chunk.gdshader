@@ -9,6 +9,7 @@ uniform sampler2D deserto;
 uniform sampler2D rocha;
 
 uniform sampler2D humidade;
+uniform float lim_hum = 0.5;
 uniform sampler2D temperatura;
 
 varying float vertex_x;
@@ -28,20 +29,21 @@ void fragment() {
 	
 	vec3 corGrama = texture(grama, UV).rgb;
 	vec3 corDeserto = texture(deserto, UV).rgb;
-	
-	vec3 cor = corGrama;
-	if ((hum < 0.35) && (temp > 0.45)) {
-		//cor = corDeserto;
-		float ihum = 1.0 - hum; // 0.65
-		float tt = ihum + temp; // 1.10
-		cor = mix(cor, corDeserto, smoothstep(1.10,1.105, tt));
-	//} else if (((0.40 <= temp) && (temp <= 0.45)) && (0.30 <= hum) && (hum <= 0.35)) {
-		//cor = mix(corDeserto, corGrama, smoothstep(0.30,0.35,hum));
-		//cor = mix(cor, corDeserto, smoothstep(0.40,0.45,temp));
-		////cor = vec3(1.0,0.0,0.0);
-	}
 
-	//cor = texture(humidade, vec2(vertex_x, vertex_z)/size).rgb;
+
+	vec3 cor = corGrama;
+	if (hum < lim_hum) {
+		//cor = mix(cor, corDeserto, smoothstep(lim_hum, lim_hum, hum));
+		cor = corDeserto;
+	}
+	
+	//vec3 cor = corGrama;
+	//if ((hum < 0.35) && (temp > 0.45)) {
+		////cor = corDeserto;
+		//float ihum = 1.0 - hum; // 0.65
+		//float tt = ihum + temp; // 1.10
+		//cor = mix(cor, corDeserto, smoothstep(1.10,1.11, tt));
+	//}
 	ALBEDO = cor;
 	
 	

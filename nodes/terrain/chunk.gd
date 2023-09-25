@@ -20,7 +20,7 @@ var uvz = 0
 func _ready():
 	pass
 
-func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, posOrigin:Vector2):
+func GenerateTerrain(noise: FastNoiseLite, st:SurfaceTool, posOrigin:Vector2):
 	for _z in range(lod+1):
 		if uvz == 0: uvz = 1
 		else: uvz = 0
@@ -35,7 +35,8 @@ func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, posOrigin:Vector2):
 			
 			if uvx == 0: uvx = 1
 			else: uvx = 0
-			var uv = Vector2(uvx, uvz)
+			#var uv = Vector2(uvx, uvz)
+			var uv = unidPos
 			st.set_uv(uv)
 			
 			var vertex = Vector3(pontoNaMesh.x, y, pontoNaMesh.y)
@@ -62,17 +63,18 @@ func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, posOrigin:Vector2):
 	
 	var sm = ShaderMaterial.new()
 	sm.shader = preload("res://nodes/terrain/chunk.gdshader")
-#	sm.set_shader_parameter("teste", teste)
 	sm.set_shader_parameter("grama", grama)
 	sm.set_shader_parameter("deserto", deserto)
 	
 	var fn = FastNoiseLite.new()
 	fn.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
-	fn.frequency = 0.01
+	fn.frequency = 0.0001
 	fn.fractal_gain = 0.8
 	fn.fractal_octaves = 8
-	#fn.offset = Vector3(posOrigin.x*size.x-center_terrain.x,posOrigin.y*size.y-center_terrain.y,0.0)
-	fn.offset = Vector3(posOrigin.x*size.x,posOrigin.y*size.y,0.0)
+	var offset = Vector3(posOrigin.x*size.x-center_terrain.x,posOrigin.y*size.y-center_terrain.y,0.0)
+	#var offset = Vector3(posOrigin.x*size.x,posOrigin.y*size.y,0.0)
+	print(offset)
+	fn.offset = offset
 	
 	humidade = NoiseTexture2D.new()
 	humidade.width = size.x
@@ -84,7 +86,6 @@ func generate_terrain(noise: FastNoiseLite, st:SurfaceTool, posOrigin:Vector2):
 	sm.set_shader_parameter("origin", posOrigin)
 	sm.set_shader_parameter("size", size)
 	mesh.surface_set_material(0, sm)
-	
 
 @export var update: bool = false
 func _process(delta):
