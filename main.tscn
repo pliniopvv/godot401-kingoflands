@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_qd6ei"]
 [ext_resource type="Script" path="res://main/terrain.gd" id="1_slsdw"]
-[ext_resource type="Texture2D" uid="uid://7w08myerjfrf" path="res://assets/texture/grass.jpg" id="2_omrht"]
 [ext_resource type="Texture2D" uid="uid://dv01afi4q4dsc" path="res://assets/texture/sand.jpg" id="3_er2um"]
+[ext_resource type="Texture2D" uid="uid://glvr21nbhher" path="res://assets/texture/forest_grass.jpg" id="3_te827"]
 [ext_resource type="PackedScene" uid="uid://dgumxtc2jpsh4" path="res://nodes/player/player.tscn" id="4_hqu8n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqqac"]
@@ -22,14 +22,14 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 
 [node name="terrain" type="Node3D" parent="."]
 script = ExtResource("1_slsdw")
-grama = ExtResource("2_omrht")
+grama = ExtResource("3_te827")
 deserto = ExtResource("3_er2um")
 
 [node name="player" parent="." instance=ExtResource("4_hqu8n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="camera" type="Camera3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 9)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 4.55291, 14.7956)
 
 [node name="Node" type="Node" parent="."]
 

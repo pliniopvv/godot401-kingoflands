@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c365tmnw5a6tp"
-path.s3tc="res://.godot/imported/terra_vermelha.jpg-d013278aa23883208dda02bd8624f47b.s3tc.ctex"
+uid="uid://c8yxhf52fc1w8"
+path.s3tc="res://.godot/imported/grass_colorpallete2.jpg-2e0f573c0df482db9e2316fa9215b974.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/texture/terra_vermelha.jpg"
-dest_files=["res://.godot/imported/terra_vermelha.jpg-d013278aa23883208dda02bd8624f47b.s3tc.ctex"]
+source_file="res://assets/blender/grass_colorpallete2.jpg"
+dest_files=["res://.godot/imported/grass_colorpallete2.jpg-2e0f573c0df482db9e2316fa9215b974.s3tc.ctex"]
 
 [params]
 

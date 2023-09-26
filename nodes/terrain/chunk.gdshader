@@ -9,7 +9,7 @@ uniform sampler2D leste;
 uniform sampler2D norte;
 uniform sampler2D sul;
 
-uniform sampler2D biome;
+uniform sampler2D bioma;
 
 varying float vertex_x;
 varying float vertex_z;
@@ -25,7 +25,7 @@ void fragment() {
 	vec2 center = size/2.0;
 	vec2 uvposition = position/size - (origin-center)*size;
 	uvposition = uvposition - center;
-	vec3 cor = texture(biome, uvposition).rgb;
+	vec3 cor = texture(bioma, uvposition).rgb;
 
 	if (UV.x < 0.1) {
 		vec3 cOeste = texture(oeste, UV).rgb;

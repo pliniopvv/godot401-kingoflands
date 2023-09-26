@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://nodes/terrain/chunk.gd" id="1_63v81"]
 [ext_resource type="Shader" path="res://nodes/terrain/chunk.gdshader" id="1_hv2tb"]
-[ext_resource type="Texture2D" uid="uid://7w08myerjfrf" path="res://assets/texture/grass.jpg" id="2_ylwuf"]
 [ext_resource type="Texture2D" uid="uid://dv01afi4q4dsc" path="res://assets/texture/sand.jpg" id="3_se05f"]
+[ext_resource type="Texture2D" uid="uid://glvr21nbhher" path="res://assets/texture/forest_grass.jpg" id="4_a3plp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdvpc"]
 render_priority = 0
@@ -15,7 +15,6 @@ shader_parameter/oeste = ExtResource("3_se05f")
 shader_parameter/leste = ExtResource("3_se05f")
 shader_parameter/norte = ExtResource("3_se05f")
 shader_parameter/sul = ExtResource("3_se05f")
-shader_parameter/biome = ExtResource("2_ylwuf")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_tx8v7"]
 _surfaces = [{
@@ -34,3 +33,5 @@ blend_shape_mode = 0
 [node name="chunk" type="MeshInstance3D"]
 mesh = SubResource("ArrayMesh_tx8v7")
 script = ExtResource("1_63v81")
+tGrama = ExtResource("4_a3plp")
+densidade_grama = 500

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c365tmnw5a6tp"
-path.s3tc="res://.godot/imported/terra_vermelha.jpg-d013278aa23883208dda02bd8624f47b.s3tc.ctex"
+uid="uid://glvr21nbhher"
+path.s3tc="res://.godot/imported/forest_grass.jpg-45a9477a7e7e5eb5de1e5fd5622fcf56.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/texture/terra_vermelha.jpg"
-dest_files=["res://.godot/imported/terra_vermelha.jpg-d013278aa23883208dda02bd8624f47b.s3tc.ctex"]
+source_file="res://assets/texture/forest_grass.jpg"
+dest_files=["res://.godot/imported/forest_grass.jpg-45a9477a7e7e5eb5de1e5fd5622fcf56.s3tc.ctex"]
 
 [params]
 
