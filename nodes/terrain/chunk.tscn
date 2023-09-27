@@ -34,4 +34,5 @@ blend_shape_mode = 0
 mesh = SubResource("ArrayMesh_tx8v7")
 script = ExtResource("1_63v81")
 tGrama = ExtResource("4_a3plp")
-densidade_grama = 500
+
+[node name="grass" type="MultiMeshInstance3D" parent="."]

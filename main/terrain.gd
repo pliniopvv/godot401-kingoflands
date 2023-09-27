@@ -68,8 +68,7 @@ func generate_chunk(humNoise:FastNoiseLite, noise:FastNoiseLite, surfacetool: Su
 	c.humNoise = humNoise
 	c.noise = noise
 	c.surfacetool = surfacetool
-	
-	c.generate_terrain(posChunk)
+	c.position = Vector3(posChunk.x*size_chunks.x,0,posChunk.y*size_chunks.y)
 	return c
 	
 func check_visibles_chunks(pos: Vector2):

@@ -25,27 +25,24 @@ var type_biome = Bioma.Floresta
 var noise: FastNoiseLite
 var humNoise: FastNoiseLite
 var surfacetool:SurfaceTool
+@onready var grass := $grass
 
 const grama_item := preload("res://assets/blender/grass.gltf")
+const grass_mesh := preload("res://nodes/terrain/biomes/forest/grass/grass.res")
 var thread1 : Thread = Thread.new()
 
 func _ready():
+	generate_terrain()
 	pass
 
-func generate_terrain(posOrigin: Vector2):
+func generate_terrain():
 	randomize()
 	var sizev3 = Vector3(size.x, 1.0, size.y)
-	position = Vector3(posOrigin.x, 0, posOrigin.y) * sizev3
+	var posOrigin = Vector2(position.x/size.x,position.z/size.y)
 	for _z in range(resolution+1):
 		for _x in range(resolution+1):
 			var percent = Vector2(_x,_z)/resolution
 			var pontoNaMesh = Vector3((percent.x-center_offset), 0, (percent.y-center_offset))
-			# inserindo grama
-			#for i in range(densidade_grama/resolution):
-				#var pgrass = (Vector3(randf()-center_offset,0,randf()-center_offset))
-				#pgrass.y = noise.get_noise_2d(posOrigin.x+pgrass.x, posOrigin.y+pgrass.z) * altura * resolution
-				#insert_grass(pgrass)
-			# ###############
 			if not flat:
 				pontoNaMesh.y = noise.get_noise_2d(posOrigin.x+pontoNaMesh.x, posOrigin.y+pontoNaMesh.z) * altura * resolution
 			var vertex = pontoNaMesh * sizev3
@@ -134,7 +131,7 @@ func get_center():
 	return center_terrain
 
 @export_group("Configurações do bioma de grama")
-@export var densidade_grama = 100
+@export var densidade_grama = 500
 @export var visible_grama = true
 func build_biome(position: Vector3):
 	match type_biome:
@@ -142,11 +139,18 @@ func build_biome(position: Vector3):
 			pass
 		_:
 			randomize()
+			var mm = MultiMesh.new()
+			mm.transform_format = MultiMesh.TRANSFORM_3D
+			mm.instance_count = densidade_grama*3
+			mm.visible_instance_count = densidade_grama
+			mm.mesh = grass_mesh
+			grass.multimesh = mm
+			
+			var sizev3 = Vector3(size.x,1,size.y)
 			for i in range(densidade_grama):
 				var pos = Vector3(randf()-center_offset,0,randf()-center_offset)
 				pos.y = noise.get_noise_2d(position.x/size.x+pos.x,position.z/size.y+pos.z) * altura * resolution
-				insert_grass(pos)
-			pass
+				mm.set_instance_transform(i, Transform3D(Basis(), pos*sizev3))
 
 func insert_grass(pos: Vector3):
 	var sizev3 = Vector3(size.x,1,size.y)
