@@ -36,3 +36,4 @@ script = ExtResource("1_63v81")
 tGrama = ExtResource("4_a3plp")
 
 [node name="grass" type="MultiMeshInstance3D" parent="."]
+cast_shadow = 0

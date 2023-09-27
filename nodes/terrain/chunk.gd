@@ -28,7 +28,7 @@ var surfacetool:SurfaceTool
 @onready var grass := $grass
 
 const grama_item := preload("res://assets/blender/grass.gltf")
-const grass_mesh := preload("res://nodes/terrain/biomes/forest/grass/grass.res")
+const grass_mesh := preload("res://nodes/terrain/biomes/forest/grass/grass4.res")
 var thread1 : Thread = Thread.new()
 
 func _ready():
@@ -152,11 +152,11 @@ func build_biome(position: Vector3):
 				pos.y = noise.get_noise_2d(position.x/size.x+pos.x,position.z/size.y+pos.z) * altura * resolution
 				mm.set_instance_transform(i, Transform3D(Basis(), pos*sizev3))
 
-func insert_grass(pos: Vector3):
-	var sizev3 = Vector3(size.x,1,size.y)
-	var item = grama_item.instantiate()
-	item.position = pos*sizev3
-	item.scale = Vector3(0.3,0.3,0.3)
-	item.visible = visible_grama
-	#add_child(item)
-	call_deferred("add_child",item)
+#func insert_grass(pos: Vector3):
+	#var sizev3 = Vector3(size.x,1,size.y)
+	#var item = grama_item.instantiate()
+	#item.position = pos*sizev3
+	#item.scale = Vector3(0.3,0.3,0.3)
+	#item.visible = visible_grama
+	##add_child(item)
+	#call_deferred("add_child",item)
