@@ -1,6 +1,11 @@
 extends MeshInstance3D
 class_name GenericChunk
 
+enum Bioma {
+	Floresta,
+	Deserto
+}
+
 @export_category("Configurações iniciais")
 @export_group("Texturas")
 @export var tGrama: Texture2D = preload("res://assets/texture/grass2.jpg")
@@ -15,23 +20,19 @@ class_name GenericChunk
 var center_terrain = size/2
 var center_offset = 0.5
 var lim_hum = 0.35
+var type_biome = Bioma.Floresta
 
-#
-#		CONFIGURAÇÕES DOS BIOMAS
-#
-
-enum Bioma {
-	Floresta,
-	Deserto
-} 
+var noise: FastNoiseLite
+var humNoise: FastNoiseLite
+var surfacetool:SurfaceTool
 
 const grama_item := preload("res://assets/blender/grass.gltf")
-
+var thread1 : Thread = Thread.new()
 
 func _ready():
 	pass
 
-func generate_terrain(bnoise: FastNoiseLite, noise: FastNoiseLite, st:SurfaceTool, posOrigin:Vector2):
+func generate_terrain(posOrigin: Vector2):
 	randomize()
 	var sizev3 = Vector3(size.x, 1.0, size.y)
 	position = Vector3(posOrigin.x, 0, posOrigin.y) * sizev3
@@ -52,25 +53,25 @@ func generate_terrain(bnoise: FastNoiseLite, noise: FastNoiseLite, st:SurfaceToo
 			uv.x = percent.x
 			uv.y = percent.y
 			
-			st.set_uv(uv)
-			st.add_vertex(vertex)
+			surfacetool.set_uv(uv)
+			surfacetool.add_vertex(vertex)
 	
 	var vert = 0
 	for z in range(resolution):
 		for x in range(resolution):
-			st.add_index(vert+0)
-			st.add_index(vert+1)
-			st.add_index(vert+resolution+1)
-			st.add_index(vert+resolution+1)
-			st.add_index(vert+1)
-			st.add_index(vert+resolution+2)
+			surfacetool.add_index(vert+0)
+			surfacetool.add_index(vert+1)
+			surfacetool.add_index(vert+resolution+1)
+			surfacetool.add_index(vert+resolution+1)
+			surfacetool.add_index(vert+1)
+			surfacetool.add_index(vert+resolution+2)
 			vert+=1
 		vert+=1
 	
-	st.generate_normals()
+	surfacetool.generate_normals()
 	
-	mesh = st.commit()
-	st.clear()
+	mesh = surfacetool.commit()
+	surfacetool.clear()
 	
 	create_trimesh_collision()
 	
@@ -82,20 +83,18 @@ func generate_terrain(bnoise: FastNoiseLite, noise: FastNoiseLite, st:SurfaceToo
 	#
 	#				CONFIGURANDO BIOMAS
 	#
-	
-	var type_biome = Bioma.Floresta
-	
+
 	var oeste = tGrama
 	var leste = tGrama
 	var norte = tGrama
 	var sul = tGrama
 	var bioma = tGrama
 	
-	var hum = bnoise.get_noise_2dv(posOrigin)
-	var hOeste = bnoise.get_noise_2d(posOrigin.x-1, posOrigin.y)
-	var hLeste = bnoise.get_noise_2d(posOrigin.x+1, posOrigin.y)
-	var hNorte = bnoise.get_noise_2d(posOrigin.x, posOrigin.y+1)
-	var hSul = bnoise.get_noise_2d(posOrigin.x, posOrigin.y-1)
+	var hum = humNoise.get_noise_2dv(posOrigin)
+	var hOeste = humNoise.get_noise_2d(posOrigin.x-1, posOrigin.y)
+	var hLeste = humNoise.get_noise_2d(posOrigin.x+1, posOrigin.y)
+	var hNorte = humNoise.get_noise_2d(posOrigin.x, posOrigin.y+1)
+	var hSul = humNoise.get_noise_2d(posOrigin.x, posOrigin.y-1)
 	
 	if (hum < lim_hum):
 		bioma = tDeserto
@@ -117,7 +116,10 @@ func generate_terrain(bnoise: FastNoiseLite, noise: FastNoiseLite, st:SurfaceToo
 	
 	mesh.surface_set_material(0, sm)
 	
-	build_biome(noise, type_biome)
+	var e = thread1.start(build_biome.bind(position), Thread.PRIORITY_LOW)
+	if e:
+		print("Erro: ", e)
+	#build_biome()
 
 @export var update: bool = false
 func _process(delta):
@@ -134,13 +136,13 @@ func get_center():
 @export_group("Configurações do bioma de grama")
 @export var densidade_grama = 100
 @export var visible_grama = true
-func build_biome(noise: FastNoiseLite, type_biome: Bioma):
+func build_biome(position: Vector3):
 	match type_biome:
 		Bioma.Deserto:
 			pass
 		_:
+			randomize()
 			for i in range(densidade_grama):
-				randomize()
 				var pos = Vector3(randf()-center_offset,0,randf()-center_offset)
 				pos.y = noise.get_noise_2d(position.x/size.x+pos.x,position.z/size.y+pos.z) * altura * resolution
 				insert_grass(pos)
@@ -152,4 +154,5 @@ func insert_grass(pos: Vector3):
 	item.position = pos*sizev3
 	item.scale = Vector3(0.3,0.3,0.3)
 	item.visible = visible_grama
-	add_child(item)
+	#add_child(item)
+	call_deferred("add_child",item)

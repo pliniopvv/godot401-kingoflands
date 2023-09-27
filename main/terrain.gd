@@ -17,7 +17,9 @@ var pos = Vector2(0,0)
 var player: CharacterBody3D
 var surfacetool: SurfaceTool
 var noise: FastNoiseLite
-var bnoise: FastNoiseLite
+var humNoise: FastNoiseLite
+
+var thread1 = Thread.new()
 
 func set_player(p: CharacterBody3D):
 	player = p
@@ -28,11 +30,11 @@ func _ready():
 		noise.frequency = 0.07
 		noise.noise_type = FastNoiseLite.TYPE_PERLIN
 		
-		bnoise = FastNoiseLite.new()
-		bnoise.frequency = 0.07
-		bnoise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
-		bnoise.fractal_gain = 0.2
-		bnoise.fractal_octaves = 8
+		humNoise = FastNoiseLite.new()
+		humNoise.frequency = 0.07
+		humNoise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+		humNoise.fractal_gain = 0.2
+		humNoise.fractal_octaves = 8
 		
 		generate_chunks(pos)
 
@@ -45,7 +47,7 @@ func generate_chunks(pos: Vector2):
 			var pC = Vector2(fx,fz)
 			if not map.has(pC):
 				#criação das chunks
-				var chunk = generate_chunk(bnoise, noise, surfacetool, pC)
+				var chunk = generate_chunk(humNoise, noise, surfacetool, pC)
 				map[pC] = chunk
 				add_child(chunk)
 
@@ -54,12 +56,22 @@ func _process(delta):
 	if pos != chunk_pos:
 		pos = chunk_pos
 		generate_chunks(pos)
+		#thread1.start(check_visibles_chunks, Thread.PRIORITY_LOW)
 
-func generate_chunk(bnoise:FastNoiseLite, noise:FastNoiseLite, surfacetool: SurfaceTool, posChunk: Vector2):
+func generate_chunk(humNoise:FastNoiseLite, noise:FastNoiseLite, surfacetool: SurfaceTool, posChunk: Vector2):
 	var c = chunk.instantiate()
 	c.size = size_chunks
 	c.altura = altura_chunks
 	c.resolution = meshResolution
 	c.flat = flat
-	c.generate_terrain(bnoise, noise, surfacetool, posChunk)
+	
+	c.humNoise = humNoise
+	c.noise = noise
+	c.surfacetool = surfacetool
+	
+	c.generate_terrain(posChunk)
 	return c
+	
+func check_visibles_chunks(pos: Vector2):
+	
+	pass
