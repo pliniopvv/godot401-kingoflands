@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cmhxq57f3ocwg"]
+
+[ext_resource type="Shader" path="res://nodes/terrain/biomes/forest/grass/grass7.gdshader" id="1_ugyku"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_00jsn"]
+frequency = 0.1
+fractal_octaves = 8
+fractal_gain = 0.2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wtbb2"]
+noise = SubResource("FastNoiseLite_00jsn")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ugyku")
+shader_parameter/noise = SubResource("NoiseTexture2D_wtbb2")

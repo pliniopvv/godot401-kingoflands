@@ -38,17 +38,17 @@ void fragment() {
 	albedo_tex *= COLOR;
 	vec3 clarear = vec3(0.3);
 	ALBEDO = (albedo.rgb * albedo_tex.rgb) + clarear;
-	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
-	METALLIC = metallic_tex * metallic;
-	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
-	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
-	ROUGHNESS = roughness_tex * roughness;
-	SPECULAR = specular;
-	vec3 normal = texture(texture_normal,base_uv).rgb;
-	NORMAL_MAP = vec3(normal.x,1.0,normal.z);
-	NORMAL_MAP_DEPTH = normal_scale;
+	//float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	//METALLIC = metallic_tex * metallic;
+	//vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	//float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	//ROUGHNESS = roughness_tex * roughness;
+	//SPECULAR = specular;
+	//vec3 normal = texture(texture_normal,base_uv).rgb;
+	//NORMAL_MAP = vec3(normal.x,1.0,normal.z);
+	//NORMAL_MAP_DEPTH = normal_scale;
 	ALPHA *= albedo.a * albedo_tex.a;
-	ALPHA_SCISSOR_THRESHOLD = alpha_scissor_threshold;
-	NORMAL = vec3(0.0,1.0,0.0);
+	//ALPHA_SCISSOR_THRESHOLD = alpha_scissor_threshold;
+	//NORMAL = vec3(0.0,1.0,0.0);
 }
 "

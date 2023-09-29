@@ -36,7 +36,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-77.2232, 38.6859)
 modes/diffuse = 3
 nodes/fragment/2/node = SubResource("VisualShaderNodeVectorCompose_kiu4v")
 nodes/fragment/2/position = Vector2(145, 397)

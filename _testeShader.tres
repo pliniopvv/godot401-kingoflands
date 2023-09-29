@@ -1,0 +1,43 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://cg103gsrehlgc"]
+
+[ext_resource type="Texture2D" uid="uid://dax04v6vycgl7" path="res://assets/blender/grass5_grass-alpha-grass.png" id="1_oftb1"]
+[ext_resource type="Texture2D" uid="uid://c5wyeux5h3817" path="res://assets/blender/alpha-grass.jpg" id="2_wdjmm"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_eeddq"]
+output_port_for_preview = 0
+texture = ExtResource("1_oftb1")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_k6isw"]
+texture = ExtResource("2_wdjmm")
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_2;
+uniform sampler2D tex_frg_3;
+
+
+
+void fragment() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ALPHA = n_out3p0.x;
+
+
+}
+"
+nodes/fragment/0/position = Vector2(480, 100)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_eeddq")
+nodes/fragment/2/position = Vector2(-180, -20)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_k6isw")
+nodes/fragment/3/position = Vector2(120, 220)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 0, 1)

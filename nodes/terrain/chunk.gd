@@ -28,7 +28,9 @@ var surfacetool:SurfaceTool
 @onready var grass := $grass
 
 const grama_item := preload("res://assets/blender/grass.gltf")
-const grass_mesh := preload("res://nodes/terrain/biomes/forest/grass/grass4.res")
+#const grass_mesh := preload("res://nodes/terrain/biomes/forest/grass/grass5.res")
+const grass_mesh := preload("res://nodes/terrain/biomes/forest/grass/grass7arraymesh.res")
+
 var thread1 : Thread = Thread.new()
 
 func _ready():
@@ -113,10 +115,10 @@ func generate_terrain():
 	
 	mesh.surface_set_material(0, sm)
 	
-	var e = thread1.start(build_biome.bind(position), Thread.PRIORITY_LOW)
-	if e:
-		print("Erro: ", e)
-	#build_biome()
+	#var e = thread1.start(build_biome.bind(position), Thread.PRIORITY_LOW)
+	#if e:
+		#print("Erro: ", e)
+	build_biome(position)
 
 @export var update: bool = false
 func _process(delta):
@@ -131,7 +133,7 @@ func get_center():
 	return center_terrain
 
 @export_group("Configurações do bioma de grama")
-@export var densidade_grama = 500
+@export var densidade_grama = 10
 @export var visible_grama = true
 func build_biome(position: Vector3):
 	match type_biome:
