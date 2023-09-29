@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cagjrvm2a2615"]
+[gd_scene load_steps=8 format=3 uid="uid://cagjrvm2a2615"]
 
 [ext_resource type="Script" path="res://nodes/terrain/chunk.gd" id="1_63v81"]
 [ext_resource type="Shader" path="res://nodes/terrain/chunk.gdshader" id="1_hv2tb"]
 [ext_resource type="Texture2D" uid="uid://dv01afi4q4dsc" path="res://assets/texture/sand.jpg" id="3_se05f"]
-[ext_resource type="Texture2D" uid="uid://glvr21nbhher" path="res://assets/texture/forest_grass.jpg" id="4_a3plp"]
+[ext_resource type="Texture2D" uid="uid://c1nywh7y7d2dr" path="res://assets/aseprite/grass1.png" id="4_w7mho"]
+[ext_resource type="Texture2D" uid="uid://c17fbqhff64yv" path="res://assets/aseprite/sand1.png" id="5_y48kh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdvpc"]
 render_priority = 0
@@ -33,7 +34,8 @@ blend_shape_mode = 0
 [node name="chunk" type="MeshInstance3D"]
 mesh = SubResource("ArrayMesh_tx8v7")
 script = ExtResource("1_63v81")
-tGrama = ExtResource("4_a3plp")
+tGrama = ExtResource("4_w7mho")
+tDeserto = ExtResource("5_y48kh")
 
 [node name="grass" type="MultiMeshInstance3D" parent="."]
 cast_shadow = 0

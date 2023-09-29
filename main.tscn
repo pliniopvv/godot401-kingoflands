@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://main.gd" id="1_qd6ei"]
 [ext_resource type="Script" path="res://main/terrain.gd" id="1_slsdw"]
 [ext_resource type="Texture2D" uid="uid://dv01afi4q4dsc" path="res://assets/texture/sand.jpg" id="3_er2um"]
-[ext_resource type="Texture2D" uid="uid://glvr21nbhher" path="res://assets/texture/forest_grass.jpg" id="3_te827"]
+[ext_resource type="Texture2D" uid="uid://c1nywh7y7d2dr" path="res://assets/aseprite/grass1.png" id="3_ta221"]
 [ext_resource type="PackedScene" uid="uid://dgumxtc2jpsh4" path="res://nodes/player/player.tscn" id="4_hqu8n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqqac"]
@@ -19,10 +19,11 @@ player = NodePath("player")
 
 [node name="luz" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 4.69231, 14.4536)
+directional_shadow_max_distance = 15.0
 
 [node name="terrain" type="Node3D" parent="."]
 script = ExtResource("1_slsdw")
-grama = ExtResource("3_te827")
+grama = ExtResource("3_ta221")
 deserto = ExtResource("3_er2um")
 
 [node name="player" parent="." instance=ExtResource("4_hqu8n")]
@@ -34,25 +35,30 @@ transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 
 [node name="Node" type="Node" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node"]
+visible = false
 mesh = SubResource("CapsuleMesh_kydvw")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_kydvw")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+visible = false
 mesh = SubResource("CapsuleMesh_kydvw")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_kydvw")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
+visible = false
 mesh = SubResource("CapsuleMesh_kydvw")
 skeleton = NodePath("../..")
