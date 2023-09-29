@@ -115,10 +115,10 @@ func generate_terrain():
 	
 	mesh.surface_set_material(0, sm)
 	
-	#var e = thread1.start(build_biome.bind(position), Thread.PRIORITY_LOW)
-	#if e:
-		#print("Erro: ", e)
-	build_biome(position)
+	var e = thread1.start(build_biome.bind(position), Thread.PRIORITY_LOW)
+	if e:
+		print("Erro: ", e)
+	#build_biome(position)
 
 @export var update: bool = false
 func _process(delta):
